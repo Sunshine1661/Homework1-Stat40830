@@ -1,0 +1,66 @@
+---
+title: "Homework1_24206239"
+author: "Jing Sun"
+format: pdf
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+# **1. Introduction**
+
+I'm using the *Iris* dataset for this homework1. It's a famous dataset which is built-in dataset in R with **150 observations** of flowers from three species: *setosa*, *versicolor*, and *virginica*. Each flower is described by **four features**: sepal length, sepal width, petal length, and petal width (in cm).
+
+In the rest of this report, I look at the relationship between **petal length** and **petal width**, which helps to show how the species differ.
+
+# **2. Method**
+
+I first explored the data briefly using `head()`, `summary()`, and `table()` to check the structure and basic statistics before making the plot:
+
+## **Exploring the Data**
+
+```{r}
+head(iris)
+summary(iris[, 3:4])
+table(iris$Species)
+```
+
+From the output above, we can obtain these information:
+
+-   The dataset has **150 rows** and **5 columns**.
+-   Each species appears exactly **50 times**.
+-   The average petal length is around **3.76 cm** and average petal width is about **1.20 cm**.
+-   *Setosa* tends to have much smaller petals than *virginica*, as seen clearly in the summary and scatter plot.
+
+# **3. Scatter Plot: Petal Length vs Petal Width**
+
+I drew this scatter plot to show how petal length and width vary across species, since that’s the main focus of this report:
+
+```{r}
+library(ggplot2)
+
+ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Species)) +
+  geom_point(size = 3, alpha = 0.8) +
+  labs(
+    title = "Petal Length vs Petal Width by Species",
+    x = "Petal Length (cm)",
+    y = "Petal Width (cm)"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14, hjust = 0.5),
+    axis.title = element_text(size = 12),
+    legend.title = element_text(face = "bold")
+  )
+```
+
+## **Plot Description**
+
+The scatter plot shows a clear separation between the three iris species:
+
+-   *Setosa* flowers have short and narrow petals.
+-   *Versicolor* falls in the mid-range.
+-   *Virginica* flowers have the longest and widest petals.
+
+This suggests that petal size is a strong indicator for classifying iris species.
